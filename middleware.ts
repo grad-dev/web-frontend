@@ -2,16 +2,10 @@
 // https://next-auth.js.org/configuration/nextjs#middleware
 // https://nextjs.org/docs/app/building-your-application/routing/middleware
 
-import NextAuth from 'next-auth';
-import authConfig from './auth.config';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const { auth } = NextAuth(authConfig);
+// no next auth installed , just empty middleware
 
-export default auth((req) => {
-  if (!req.auth) {
-    const url = req.url.replace(req.nextUrl.pathname, '/');
-    return Response.redirect(url);
-  }
-});
-
-export const config = { matcher: ['/dashboard/:path*'] };
+export default async (req: NextApiRequest, res: NextApiResponse, next) => {
+  return next();
+};
